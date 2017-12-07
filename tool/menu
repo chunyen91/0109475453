@@ -231,7 +231,7 @@ echo "        #         Copyright: © MuLuu09™ Premium 2017        #"| lolcat
 echo "        ====================================================="| lolcat
 echo ""
 PS3='Silahkan ketik nomor pilihan anda lalu tekan ENTER: '
-options=("Buat User" "Buat User Trial" "Perbarui User" "Semua User" "Hapus User" "Monitor User Login" "Aktifkan Kill Multi Login" "Matikan Kill Multi Login" "User Belum Kadaluarsa" "User Sudah Kadaluarsa" "Restart Server" "Ganti Password User" "Ganti Password VPS" "Used Data By Users" "bench-network" "Ram Status" "Bersihkan cache ram" "Ganti Port OpenVPN" "Ganti Port Dropbear" "Ganti Port Openssh" "Ganti Port Squid3" "Speedtest" "Edit Banner Login" "Lihat Lokasi User" "install openvpn" "install ocspanel" "Quit")
+options=("Buat User" "Buat User Trial" "Perbarui User" "Semua User" "Hapus User" "Monitor User Login" "Aktifkan Kill Multi Login" "Matikan Kill Multi Login" "User Belum Kadaluarsa" "User Sudah Kadaluarsa" "Restart Server" "Ganti Password User" "Ganti Password VPS" "Used Data By Users" "bench-network" "Ram Status" "Bersihkan cache ram" "Ganti Port OpenVPN" "Ganti Port Dropbear" "Ganti Port Openssh" "Ganti Port Squid3" "Speedtest" "Edit Banner Login" "Lihat Lokasi User" "Install openvpn" "Install ocspanel" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -432,11 +432,11 @@ read -p "Ketik Salah Satu Alamat IP User: " userip
 curl ipinfo.io/$userip
                          break
                          ;;
-"Bersihkan cache ram")
+"Install openvpn")
 wget https://raw.githubusercontent.com/chunyen91/0109475453/master/tool/v.p.n && bash v.p.n
                          break
                          ;;
-"Bersihkan cache ram")
+"Install ocspanel")
 wget https://raw.githubusercontent.com/chunyen91/0109475453/master/tool/ocs-panel && bash ocs-panel
 break
 ;;
