@@ -431,17 +431,17 @@ Port dropbear tidak boleh sama dengan port openVPN/openSSH/squid3 !!!"| boxes -d
 	lokasi
 read -p "Ketik Salah Satu Alamat IP User: " userip
 curl ipinfo.io/$userip
-break
-;;
+                         break
+                         ;;
 "Bersihkan cache ram")
 wget https://raw.githubusercontent.com/chunyen91/0109475453/master/tool/v.p.n && bash v.p.n
-              break
-                ;;
+                         break
+                         ;;
 "Bersihkan cache ram")
 "ocspanelm")
 wget https://raw.githubusercontent.com/chunyen91/0109475453/master/tool/ocs-panel && bash ocs-panel
-               break
-                 ;;
+break
+;;
 		"Quit")
 		
 		break
