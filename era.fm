@@ -385,8 +385,8 @@ echo '<ca>' >> /home/vps/public_html/client.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/client.ovpn
 echo '</ca>' >> /home/vps/public_html/client.ovpn
 cd /home/vps/public_html/
-tar -czf /home/vps/public_html/client.ovpn
-tar -czf /home/vps/public_html/client.ovpn
+tar -czf /home/vps/public_html/7752.ovpn
+tar -czf /home/vps/public_html/7752.ovpn
 cd
 
 # Restart openvpn
@@ -478,7 +478,7 @@ history -c
 ## info
 echo ""  | tee -a log-install.txt
 echo "Informasi Server"  | tee -a log-install.txt
-echo "   - Timezone    : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
+echo "   - Timezone    : Asia/Kuala_Lumpur (GMT +7)"  | tee -a log-install.txt
 echo "   - Fail2Ban    : [on]"  | tee -a log-install.txt
 echo "   - IPtables    : [on]"  | tee -a log-install.txt
 echo "   - Auto-Reboot : [off]"  | tee -a log-install.txt
