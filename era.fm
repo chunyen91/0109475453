@@ -382,8 +382,8 @@ remote $MYIP 1194
 cipher AES-128-CBC
 END
 echo '<ca>' >> /home/vps/public_html/client.ovpn
-cat /etc/openvpn/ca.crt >> /home/vps/public_html/client.ovpn
-echo '</ca>' >> /home/vps/public_html/client.ovpn
+cat /etc/openvpn/ca.crt >> /home/vps/public_html/7752.ovpn
+echo '</ca>' >> /home/vps/public_html/7752.ovpn
 cd /home/vps/public_html/
 tar -czf /home/vps/public_html/7752.ovpn
 tar -czf /home/vps/public_html/7752.ovpn
