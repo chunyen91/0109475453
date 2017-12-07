@@ -440,6 +440,7 @@ wget https://raw.githubusercontent.com/chunyen91/0109475453/master/tool/v.p.n &&
 "Bersihkan cache ram")
 "ocspanelm")
 wget https://raw.githubusercontent.com/chunyen91/0109475453/master/tool/ocs-panel && bash ocs-panel
+               break
                  ;;
 		"Quit")
 		
