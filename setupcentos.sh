@@ -501,9 +501,32 @@ iptables-restore < /etc/iptables.up.rules
 yum -y install bmon
 
 # download script
+cd /usr/bin
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/menu && chmod +x menu
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/badvpn-udpgw && chmod +x badvpn-udpgw
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/banned-user && chmod +x banned-user
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/basename && chmod +x basename
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/benchmark && chmod +x benchmark
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/bmon && chmod +x bmon
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/delete-user-expire && chmod +x delete-user-expire
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/disable-user-expire && chmod +x disable-user-expire
+wget https://raw.githubusercontent.com/fluxo7/m.e.n.u/master/ce6/dropmon && chmod +x dropmon
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/re-drop && chmod +x re-drop
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/test-speed && chmod +x test-speed
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-add && chmod +x user-add
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-add-pptp && chmod +x user-add-pptp
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-del && chmod +x user-del
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-expire-list && chmod +x user-expire-list
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-gen && chmod +x user-gen
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-limit && chmod +x user-limit
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-list && chmod +x user-list
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-login && chmod +x user-login
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-pass && chmod +x user-pass
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-renew && chmod +x user-renew
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/users && chmod +x users
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/user-active-list && chmod +x user-active-list
+wget https://raw.githubusercontent.com/chunyen91/Ford_7752/master/cen6tool/test.py && chmod +x test.py
 cd
-wget http://script.hostingtermurah.net/script/install-premiumscript.sh -O - -o /dev/null|sh
-
 # cron
 service crond start
 chkconfig crond on
