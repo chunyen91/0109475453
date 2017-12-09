@@ -146,7 +146,7 @@ cd
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/client.ovpn "https://insomnet4u.me/23mei/master/openvpn.conf"
+wget -O /etc/openvpn/client.ovpn "http://insomnet4u.me/23mei/openvpn.conf"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
 #PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -g 0 -d /root/ -s /bin/bash $dname
