@@ -165,18 +165,6 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
-cd
-apt-get install zlib1g-dev
-wget https://raw.githubusercontent.com/chunyen91/0109475453/master/dropbear-2016.74.tar.bz2
-bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
-cd dropbear-2016.74
-./configure
-make && make install
-mv /usr/sbin/dropbear /usr/sbin/dropbear.old
-ln /usr/local/sbin/dropbear /usr/sbin/dropbear
-cd && rm -rf dropbear-2016.74 && rm -rf dropbear-2016.74.tar.bz2
-service dropbear restart
-
 # install vnstat gui
 cd /home/vps/public_html/
 wget https://raw.githubusercontent.com/chunyen91/0109475453/master/vnstat_php_frontend-1.5.1.tar.gz
