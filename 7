@@ -157,53 +157,45 @@ mkdir /var/lib/premium-script
 /etc/init.d/pptpd restart
 chkconfig pptpd on
 
-# Install Webserver Port 81
-yum install nginx php libapache2-mod-php php-fpm php-cli php-mysql php-mcrypt libxml-parser-perl -y
-wget -O /etc/nginx/nginx.conf "http://hqpanel.me/centos/nginx.conf"
-sed -i 's/www-data/nginx/g' /etc/nginx/nginx.conf
-mkdir -p /home/vps/public_html
-echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-rm /etc/nginx/conf.d/*
-wget -O /etc/nginx/conf.d/vps.conf "http://hqpanel.me/centos/vps.conf"
-sed -i 's/apache/nginx/g' /etc/php-fpm.d/www.conf
-chmod -R +rx /home/vps
-wget -O /home/vps/public_html/uptime.php "http://autoscript.kepalatupai.com/uptime.php1"
-wget -O /home/vps/public_html/index.html "http://hqpanel.me/centos/index.html1"
-service php-fpm restart
-service nginx restart
-chkconfig php-fpm on
-chkconfig nginx on
-cd
-
-# OpenSSH Setting
-sed -i '/#Port 22/a Port 22' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
+# setting port ssh
+sed -i '/Port 22/a Port 80' /etc/ssh/sshd_config
+sed -i 's/#Port 22/Port  22/g' /etc/ssh/sshd_config
 service sshd restart
+chkconfig sshd on
 
-# Install Dropbear
+# install dropbear
 yum -y install dropbear
-echo "OPTIONS=\"-p 109 -p 110 -p 443 -p 999\"" > /etc/sysconfig/dropbear
+echo "OPTIONS=\"-p 443\"" > /etc/sysconfig/dropbear
 echo "/bin/false" >> /etc/shells
-echo "/usr/sbin/nologin" >> /etc/shells
-service ssh restart
 service dropbear restart
-cd
-
 chkconfig dropbear on
 
+# install webserver
+cd
+wget -O /etc/nginx/nginx.conf "http://script.fawzya.net/centos/conf/nginx.conf"
+sed -i 's/www-data/nginx/g' /etc/nginx/nginx.conf
+mkdir -p /home/vps/public_html
+echo "<pre>Setup by Fawzya.Net</pre>" > /home/vps/public_html/index.html
+echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
+rm /etc/nginx/conf.d/*
+wget -O /etc/nginx/conf.d/vps.conf "http://script.fawzya.net/centos/conf/vps.conf"
+sed -i 's/apache/nginx/g' /etc/php-fpm.d/www.conf
+chmod -R +rx /home/vps
+service php-fpm restart
+service nginx restart
+
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "http://hqpanel.me/centos/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "http://script.fawzya.net/centos/conf/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "http://hqpanel.me/centos/1194-centos.conf"
+wget -O /etc/openvpn/1194.conf "http://script.fawzya.net/centos/conf/1194-centos.conf"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /etc/openvpn/1194.conf "http://hqpanel.me/centos/1194-centos64.conf"
+  wget -O /etc/openvpn/1194.conf "http://script.fawzya.net/centos/conf/1194-centos64.conf"
 fi
-wget -O /etc/iptables.up.rules "http://hqpanel.me/centos/iptables.up.rules"
+wget -O /etc/iptables.up.rules "http://script.fawzya.net/centos/conf/iptables.up.rules"
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.d/rc.local
-MYIP=`curl icanhazip.com`;
+MYIP=`dig +short myip.opendns.com @resolver1.opendns.com`;
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 sed -i $MYIP2 /etc/iptables.up.rules;
 sed -i 's/venet0/eth0/g' /etc/iptables.up.rules
@@ -216,16 +208,18 @@ cd
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "http://hqpanel.me/centos/openvpn.conf"
+wget -O /etc/openvpn/1194-client.ovpn "http://script.fawzya.net/centos/open-vpn.conf"
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-useradd -M -s /bin/false Adam
-echo "Adam:$PASS" | chpasswd
-echo "Adam" > pass.txt
+useradd -M -s /bin/false Fawzya
+echo "Fawzya:$PASS" | chpasswd
+echo "Fawzya" > pass.txt
 echo "$PASS" >> pass.txt
 tar cf client.tar 1194-client.ovpn pass.txt
 cp client.tar /home/vps/public_html/
 cp 1194-client.ovpn /home/vps/public_html/
+cd
+
 
 # Install VNSTAT
 yum install vnstat -y
@@ -298,8 +292,10 @@ LANG=C /usr/bin/mrtg /etc/mrtg/mrtg.cfg
 LANG=C /usr/bin/mrtg /etc/mrtg/mrtg.cfg
 cd
 
-# Install Fail2Ban
-yum -y install fail2ban;service fail2ban restart
+# install fail2ban
+yum -y install fail2ban
+service fail2ban restart
+chkconfig fail2ban on
 
 # Install BadVPN
 wget -O /usr/bin/badvpn-udpgw "http://hqpanel.me/centos/badvpn-udpgw"
@@ -311,8 +307,15 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
-# Install Squid
-wget http://hqpanel.me/centos/squid.sh && bash squid.sh
+
+# install squid
+yum -y install squid
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/lanunquota/conf/master/squid-centos.conf"
+MYIP=`curl -s ifconfig.me`;
+MYIP2="s/xxxxxxxxx/$MYIP/g";
+sed -i $MYIP2 /etc/squid/squid.conf;
+chkconfig squid on
+service squid restart
 
 # install webmin
 cd
