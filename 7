@@ -67,14 +67,6 @@ rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-7.noarch
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 rpm -Uvh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
 
-if [ "$OS" == "x86_64" ]; then
-  wget http://hqpanel.me/centos/rpmforge.rpm
-  rpm -Uvh rpmforge.rpm
-else
-  wget http://hqpanel.me/centos/rpmforge.rpm
-  rpm -Uvh rpmforge.rpm
-fi
-
 sed -i 's/enabled = 1/enabled = 0/g' /etc/yum.repos.d/rpmforge.repo
 sed -i -e "/^\[remi\]/,/^\[.*\]/ s|^\(enabled[ \t]*=[ \t]*0\\)|enabled=1|" /etc/yum.repos.d/remi.repo
 rm -f *.rpm
@@ -170,19 +162,24 @@ echo "/bin/false" >> /etc/shells
 service dropbear restart
 chkconfig dropbear on
 
-# install webserver
-cd
+
+# Install Webserver Port 81
+yum install nginx php libapache2-mod-php php-fpm php-cli php-mysql php-mcrypt libxml-parser-perl -y
 wget -O /etc/nginx/nginx.conf "http://script.fawzya.net/centos/conf/nginx.conf"
 sed -i 's/www-data/nginx/g' /etc/nginx/nginx.conf
 mkdir -p /home/vps/public_html
-echo "<pre>Setup by Fawzya.Net</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 rm /etc/nginx/conf.d/*
-wget -O /etc/nginx/conf.d/vps.conf "http://script.fawzya.net/centos/conf/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "http://hqpanel.me/centos/vps.conf"
 sed -i 's/apache/nginx/g' /etc/php-fpm.d/www.conf
 chmod -R +rx /home/vps
+wget -O /home/vps/public_html/uptime.php "http://autoscript.kepalatupai.com/uptime.php1"
+wget -O /home/vps/public_html/index.html "http://hqpanel.me/centos/index.html1"
 service php-fpm restart
 service nginx restart
+chkconfig php-fpm on
+chkconfig nginx on
+cd
 
 # install openvpn
 wget -O /etc/openvpn/openvpn.tar "http://script.fawzya.net/centos/conf/openvpn-debian.tar"
