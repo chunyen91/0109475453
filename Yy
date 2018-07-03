@@ -172,8 +172,8 @@ if (isset($_SESSION['user'])) {
                     </div>
                 </div>
             </div>
-
-                        <div class="col-lg-offset-2 col-lg-8">
+	    
+                       <div class="col-lg-offset-2 col-lg-8">
                             <div class="box box-success">
                                     <div class="box-header with-border">
                                       <h3 class="box-title"><i class="fa fa-shopping-cart"></i> Pemesanan Baru</h3>
@@ -209,7 +209,8 @@ if (isset($_SESSION['user'])) {
 													<select class="form-control" id="category" name="category">
 														<option value="0">Pilih salah satu...</option>
 														<?php
-$check_cat = mysqli_query($db, "SELECT * FROM service_cat ORDER BY name ASC"); 														while ($data_cat = mysqli_fetch_assoc($check_cat)) {										
+														$check_cat = mysqli_query($db, "SELECT * FROM service_cat ORDER BY name ASC");
+														while ($data_cat = mysqli_fetch_assoc($check_cat)) {
 														?>
 														<option value="<?php echo $data_cat['id']; ?>"><?php echo $data_cat['name']; ?></option>
 														<?php
